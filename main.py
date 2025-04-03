@@ -25,10 +25,11 @@ def main():
         )
 
         # 4. (Later) Download full videos — only after you receive your NDA password
-        # fetcher.downloader.downloadGames(
-        #     files=["1_224p.mkv"],
-        #     split=["train", "valid"],
-        # )
+        fetcher.downloader.downloadGames(
+            files=["1_224p.mkv"],
+            split=["train", "valid"],
+            task="frames"
+        )
 
     except Exception as e:
         logger.error(f"Error in main: {str(e)}")
