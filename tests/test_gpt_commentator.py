@@ -16,7 +16,7 @@ def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Test GPT commentary system with SoccerNet analysis')
     parser.add_argument('--api-key', type=str, help='OpenAI API key (if not set in environment)')
-    parser.add_argument('--model', type=str, default='gpt-4', help='OpenAI model to use')
+    parser.add_argument('--model', type=str, default='gpt-4o', help='OpenAI model to use')
     parser.add_argument('--analyze-only', action='store_true', help='Only run SoccerNet analysis, skip GPT call')
     args = parser.parse_args()
     
@@ -42,7 +42,7 @@ def main():
         }
     
     # Get OpenAI API key from args, environment or config
-    api_key = config.get("commentary", {}).get("frame_based", {}).get("openai_api_key")
+    api_key = args.api_key or os.environ.get("OPENAI_API_KEY") or config.get("commentary", {}).get("gpt", {}).get("openai_api_key")
     
     # Initialize the commentator
     print("Initializing GPTCommentator with SoccerNet analysis...")
