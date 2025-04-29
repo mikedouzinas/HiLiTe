@@ -1,0 +1,3 @@
+"""
+HiLitR package initialization.
+""" 

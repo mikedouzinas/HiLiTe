@@ -74,7 +74,6 @@ class SoccerNetFetcher:
         # Get configuration with defaults
         self.local_directory = self.config.get(
             "soccernet_local_dir", "data/raw/soccernet")
-        self.username = self.config.get("soccernet_username")
         self.password = self.config.get("soccernet_password")
 
         # Ensure that directory exists
