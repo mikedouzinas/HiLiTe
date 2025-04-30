@@ -166,15 +166,18 @@ def main():
     args = p.parse_args()
 
     # prep paths
-    temp_mp4 = "temp_224p.mp4"
-    raw_npy  = "output/raw_features.npy"
+    output_dir = os.path.dirname(args.output_json)
+    temp_dir = os.path.join(output_dir, "temp")
+    temp_mp4 = os.path.join(temp_dir, "temp_224p.mp4")
+    raw_npy = os.path.join(temp_dir, "raw_features.npy")
+    model_dir = os.path.join(temp_dir, "pretrained_model")
     model_dir_name = (
         "spotting_challenge_validated_resnet_normalized_confidence_"
         "zoo_lr5e-4_dwd2e-4_sr0.02_mu0.0"
     )
 
-    os.makedirs("output", exist_ok=True)
-    os.makedirs("pretrained_model", exist_ok=True)
+    os.makedirs(temp_dir, exist_ok=True)
+    os.makedirs(model_dir, exist_ok=True)
 
     print("1) Downscaling video…")
     downscale(args.input_mkv, temp_mp4)
@@ -186,11 +189,14 @@ def main():
     best_dir = download_model(
         repo_id="yahoo-inc/spivak-action-spotting-soccernet",
         model_dir_name=model_dir_name,
-        local_root="pretrained_model"
+        local_root=model_dir
     )
 
     print("4) Running sliding-window inference + JSON export…")
     sliding_window_inference(raw_npy, best_dir, args.output_json)
+
+    # Clean up temporary files
+    shutil.rmtree(temp_dir)
 
 
 if __name__ == "__main__":

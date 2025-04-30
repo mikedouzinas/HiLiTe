@@ -84,10 +84,21 @@ def main(input_mkv: str, output_dir: str):
     # 1) generate events.json via mkv2json.py
     events_json = os.path.join(output_dir, "events.json")
     print("⏳ running mkv2json…")
-    subprocess.run(
-      ["python3", "mkv2json.py", input_mkv, events_json],
-      check=True
-    )
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    mkv2json_path = os.path.join(script_dir, "mkv2json.py")
+    try:
+        result = subprocess.run(
+            ["python3", mkv2json_path, input_mkv, events_json],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print(result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Error running mkv2json.py:")
+        print(e.stdout)
+        print(e.stderr)
+        raise
 
     # 2) load your events
     with open(events_json, "r") as f:
