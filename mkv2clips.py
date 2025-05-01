@@ -17,22 +17,22 @@ from pathlib import Path
 
 # ─── per-event clip windows (seconds before, seconds after) ───────────
 EVENT_WINDOWS = {
-    "Kick-off":           (0,   10),
-    "Goal":              (-10,  10),
-    "Substitution":      (-15,   8),
-    "Offside":           ( -8,   5),
-    "Shot on target":    ( -8,   5),
-    "Shot off target":   ( -8,   5),
-    "Clearance":         ( -5,   5),
-    "Ball out of play":  ( -5,   5),
-    "Throw-in":          ( -5,  10),
-    "Foul":              (-10,  10),
-    "Indirect free-kick":(-5,   12),
-    "Direct free-kick":  (-5,   12),
+    "Kick-off":           (0,   15),
+    "Goal":              (-10,  5),
+    "Substitution":      (-7,   8),
+    "Offside":           ( -10,   5),
+    "Shot on target":    ( -10,   5),
+    "Shot off target":   ( -10,   5),
+#    "Clearance":         ( -10,   5),
+#    "Ball out of play":  ( -10,   5),
+#    "Throw-in":          ( -5,  10),
+    "Foul":              (-10,  5),
+    "Indirect free-kick":(-5,   10),
+    "Direct free-kick":  (-5,   10),
     "Corner":            ( -3,  12),
-    "Yellow card":       (-10,   7),
-    "Red card":          (-15,  10),
-    "Yellow->red card":  (-15,  10),
+    "Yellow card":       (-10,   5),
+    "Red card":          (-7.5,  7.5),
+    "Yellow->red card":  (-7.5,  7.5),
 }
 
 def parse_game_time(game_time_str: str) -> float:
