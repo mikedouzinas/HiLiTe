@@ -29,8 +29,8 @@ class GPTCommentator:
         self.config = config
         self.api_key = config.get("openai_api_key", os.environ.get("OPENAI_API_KEY"))
         self.api_url = "https://api.openai.com/v1/chat/completions"
-        self.model = config.get("model", "gpt-4o")
-        self.max_tokens = config.get("max_tokens", 500)
+        self.model = config.get("model", "gpt-4o-mini")
+        self.max_tokens = config.get("max_tokens", 200)
         self.temperature = config.get("temperature", 0.7)
         
         # SoccerNet analyzer configuration
@@ -78,7 +78,7 @@ class GPTCommentator:
         
         # Prepare messages
         messages = [
-            {"role": "system", "content": "You are a professional soccer commentator with extensive knowledge of the sport. Your commentary is exciting, technically accurate, and captures the drama of the moment."},
+            {"role": "system", "content": "You are a professional soccer commentator with extensive knowledge of the sport. Your commentary is exciting, technically accurate, and captures the drama of the moment. Do not inlude unicode characters in your response. Also, 50% of the time you should not reference the time of the moment."},
             {"role": "user", "content": prompt}
         ]
         
@@ -238,10 +238,9 @@ Generate exciting, professional soccer commentary for this {event_type} by {team
 1. Describe the build-up play leading to this moment
 2. Comment on the players' positioning and movement
 3. Describe the specific technique and execution
-4. Mention the game context (time, score situation)
-5. Add appropriate emotion based on the importance of the moment
+4. Add appropriate emotion based on the importance of the moment
 
-Your commentary should be 3-5 sentences long, vivid, and authentic to professional soccer broadcasting.
+Your commentary should be 1-2 sentences vivid, and authentic to professional soccer broadcasting.
 """
         
         return prompt

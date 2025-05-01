@@ -127,6 +127,9 @@ def compile_highlights(clips, cfg):
     ts = int(time.time())
     manifest = final_dir / f"highlights_{ts}_manifest.json"
     
+    # Ensure clips are sorted by timestamp
+    clips.sort(key=lambda x: x["timestamp"])
+    
     # Write manifest
     with open(manifest, "w") as f:
         json.dump(clips, f, indent=2)
@@ -204,6 +207,9 @@ def main():
         start, end = EVENT_WINDOWS.get(ev["label"], (0, 5))
         ev["duration"] = end - start
         extracted_clips.append(ev)
+    
+    # Sort clips by timestamp to ensure chronological order
+    extracted_clips.sort(key=lambda x: x["timestamp"])
     logger.info(f"Loaded {len(extracted_clips)} clipped events")
 
     # ── Step 3: Commentary ──

@@ -16,7 +16,7 @@ def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Test GPT commentary system with SoccerNet analysis')
     parser.add_argument('--api-key', type=str, help='OpenAI API key (if not set in environment)')
-    parser.add_argument('--model', type=str, default='gpt-4o', help='OpenAI model to use')
+    parser.add_argument('--model', type=str, default='gpt-4o-mini', help='OpenAI model to use')
     parser.add_argument('--analyze-only', action='store_true', help='Only run SoccerNet analysis, skip GPT call')
     args = parser.parse_args()
     
@@ -31,7 +31,7 @@ def main():
             "commentary": {
                 "gpt": {
                     "model": args.model,
-                    "max_tokens": 300,
+                    "max_tokens": 200,
                     "temperature": 0.7
                 },
                 "soccernet": {
