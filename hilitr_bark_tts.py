@@ -109,7 +109,7 @@ for i, clip in enumerate(clips, start=1):
     os.remove(bark_audio_path)
     processed += 1
 
-print(f"✅ Done! {processed} clips processed with Bark commentary.")
+print(f"Done! {processed} clips processed with Bark commentary.")
 
 
 
@@ -148,7 +148,7 @@ final_video = concatenate_videoclips(clips, method="compose")
 output_path = "/content/drive/MyDrive/outputs/final/highlights_with_transitions_and_pauses.mp4"
 final_video.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
-print(f"\n✅ Final video saved to: {output_path}")
+print(f"\n Final video saved to: {output_path}")
 
 from google.colab import drive
 import os
@@ -166,7 +166,7 @@ final_dir = os.path.join(base_dir, "final")
 for d in [clips_dir, audio_dir, final_dir]:
     os.makedirs(d, exist_ok=True)
 
-print("✅ Drive mounted and folders created:")
+print(" Drive mounted and folders created:")
 print(f"- Clips: {clips_dir}")
 print(f"- Audio: {audio_dir}")
 print(f"- Final videos: {final_dir}")
